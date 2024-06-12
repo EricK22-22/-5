@@ -1,0 +1,72 @@
+using System;
+public class PC
+{
+   public string Name;
+   public string Type; // e.g. Desktop, Laptop, etc.
+   public double Height;
+   public bool IsEdible; // Можно заменить на другое более подходящее свойство, например, CanRunGames
+   public int AgeInYears;
+   public string NativeRegion; // Можно заменить на страну производства
+   public double MaintenanceCost;
+   public double MaintenanceCostPerYear
+   {
+       get { return MaintenanceCost / AgeInYears; }
+   }
+}
+class Program
+{
+   static void Main(string[] args)
+   {
+       // 1) Ввести кількість об'єктів для масиву cntPCs
+       Console.Write("Введіть кількість ПК: ");
+       int cntPCs = int.Parse(Console.ReadLine());
+       // 2) Оголосити і створити масив arrPCs
+       PC[] arrPCs = new PC[cntPCs];
+       // 3) У циклі ввести дані для всіх ПК масиву, задавши значення всіх полів
+       for (int i = 0; i < cntPCs; i++)
+       {
+           Console.Write("Введіть назву ПК: ");
+           string name = Console.ReadLine();
+           Console.Write("Введіть тип ПК (десктоп, ноутбук тощо): ");
+           string type = Console.ReadLine();
+           Console.Write("Введіть висоту ПК (метри): ");
+           double height = double.Parse(Console.ReadLine());
+           Console.Write("Чи може цей ПК запускати ігри? (y-так, n-ні): ");
+           bool canRunGames = Console.ReadKey().Key == ConsoleKey.Y;
+           Console.WriteLine();
+           Console.Write("Введіть вік ПК (роки): ");
+           int ageInYears = int.Parse(Console.ReadLine());
+           Console.Write("Введіть країну виробництва ПК: ");
+           string countryOfOrigin = Console.ReadLine();
+           Console.Write("Введіть річну вартість обслуговування ПК: ");
+           double maintenanceCost = double.Parse(Console.ReadLine());
+           Console.WriteLine();
+           PC thePC = new PC();
+           thePC.Name = name;
+           thePC.Type = type;
+           thePC.Height = height;
+           thePC.IsEdible = canRunGames;
+           thePC.AgeInYears = ageInYears;
+           thePC.NativeRegion = countryOfOrigin;
+           thePC.MaintenanceCost = maintenanceCost;
+           arrPCs[i] = thePC;
+       }
+       // 4) У циклі вивести дані всіх об'єктів масиву на екран
+       foreach (PC pc in arrPCs)
+       {
+           Console.WriteLine();
+           Console.WriteLine(" ");
+           Console.WriteLine("Дані про ПК:");
+           Console.WriteLine(" ");
+           Console.WriteLine("Назва: " + pc.Name);
+           Console.WriteLine("Тип: " + pc.Type);
+           Console.WriteLine("Висота: " + pc.Height + " метрів");
+           Console.WriteLine("Може запускати ігри: " + (pc.IsEdible ? "Так" : "Ні"));
+           Console.WriteLine("Вік: " + pc.AgeInYears + " років");
+           Console.WriteLine("Країна виробництва: " + pc.NativeRegion);
+           Console.WriteLine("Вартість обслуговування: " + pc.MaintenanceCost.ToString("0.00"));
+           Console.WriteLine("Вартість обслуговування за рік: " + pc.MaintenanceCostPerYear.ToString("0.00"));
+       }
+       Console.ReadKey();
+   }
+}
